@@ -2,6 +2,18 @@ require 'rails_helper'
 
 describe TreeDisplayController do
   describe "#get_children_node_ng" do
+    it "should receive child nodes and nodeType" do
+      TreeDisplayController.any_instance.stub(:get_children_node_ng)
+      allow(session[:user]).to receive(:id).and_return(1)
+      allow(nil).to receive(:get_children).and_return(true)
+      allow(nil).to receive(:get_name).and_return(true)
+      reactParams = {child_nodes: [{id: 1, parent_id: 0, node_object_id: 3}], nodeType: "FolderNode"}
+      params = {reactParams: reactParams}
+      childNodes = [params[:reactParams][:child_nodes]]
+      post "get_children_node_ng", params
+ #     puts request.params[:reactParams].inspect
+ #     expect(:childNodes).to eq(request.params[:reactParams][:child_nodes])
+    end
   end
   describe "#list" do
     it "should not redirect to student_task controller if current user is an instructor" do
