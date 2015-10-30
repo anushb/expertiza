@@ -36,11 +36,8 @@ class TreeDisplayController < ApplicationController
     end
 
     node_object = TreeFolder.find_by_name(name)
-    puts node_object.inspect
-    puts node_object.id
     session[:root] = FolderNode.find_by_node_object_id(node_object.id).id
     session_id = session[:root]
-    puts session[:root].inspect
     redirect_to :controller => 'tree_display', :action => 'list'
  end
 
